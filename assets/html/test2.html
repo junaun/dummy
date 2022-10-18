@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="mathquill.css"/>
+  <script src="jquery-3.6.1.min.js"></script>
+  <script src="mathquill.js"></script>
+</head>
+<body>
+  <p>hello world</p>
+  <p>Solve <span id="problem">ax^2 + bx + c = 0</span>.</p>
+
+  <script>
+    var problemSpan = document.getElementById('problem');
+    var MQ = MathQuill.getInterface(2);
+    MQ.StaticMath(problemSpan);
+  </script>
+  
+</body>
+</html>
