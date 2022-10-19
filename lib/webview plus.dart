@@ -1,6 +1,5 @@
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -17,14 +16,13 @@ class HelpScreen extends StatefulWidget {
 
 class HelpScreenState extends State<HelpScreen> {
   late WebViewPlusController controller;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text('MathQuill')),
         body: WebViewPlus(
             javascriptMode: JavascriptMode.unrestricted,
-            initialUrl: 'assets/html/test5.html',
+            initialUrl: 'assets/html/test4.html',
             onWebViewCreated: (controller) {
               this.controller = controller;
             }));

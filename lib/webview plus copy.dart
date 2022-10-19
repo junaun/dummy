@@ -16,84 +16,84 @@ class HelpScreen extends StatefulWidget {
 }
 
 class HelpScreenState extends State<HelpScreen> {
-  late WebViewPlusController controller;
+  late WebViewPlusController ctl;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text('MathQuill')),
-        body: Column(children: [
-          Row(
-            children: [
-              Expanded(
-                  child: WebViewPlus(
-                      javascriptMode: JavascriptMode.unrestricted,
-                      initialUrl: 'assets/html/test4.html',
-                      onWebViewCreated: (controller) {
-                        this.controller = controller;
-                      },
-                      javascriptChannels: {
-                    JavascriptChannel(
-                        name: 'demo',
-                        onMessageReceived: (JavascriptMessage message) {
-                          //function here
-                        })
-                  })),
-            ],
-          ),
-          /*
-          Row(
-            children: [
-              Expanded(
-                  child: ElevatedButton(
-                child: Text('1'),
-                onPressed: () {
-                  //mathbox.add expression
-                },
-              )),
-            ],
-          ),*/
-        ]));
+        body: Column(
+          children: [_mathField(), _button1()],
+        ));
+  }
+
+  Widget _mathField() {
+    return Container(
+        height: 150,
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+        child: WebViewPlus(
+          javascriptMode: JavascriptMode.unrestricted,
+          //initialUrl: 'assets/html/test5.html',
+          onWebViewCreated: (controller) {
+            controller.loadUrl('assets/html/test4.html');
+            MathBoxController().webViewPlusController = controller;
+          },
+        ));
+  }
+
+  Widget _button1() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+      child: ElevatedButton(
+        child: Text(
+          '1',
+          style: TextStyle(fontSize: 20.0),
+        ),
+        onPressed: () {
+          MathBoxController().reloaddd();
+          //MathBoxController()._webViewController.webViewController.reload();
+        },
+      ),
+    );
   }
 }
 
 class MathBoxController {
-  late WebViewController _webViewController;
+  late WebViewPlusController _webViewController;
   late AnimationController clearAnimationController;
 
-  set webViewController(WebViewController controller) {
-    this._webViewController = controller;
+  set webViewPlusController(WebViewPlusController controller) {
+    _webViewController = controller;
+  }
+
+  void reloaddd() {
+    _webViewController.webViewController.reload();
   }
 
   void addExpression(String msg, {bool isOperator = false}) {
-    assert(_webViewController != null);
-    _webViewController.runJavascript(
+    _webViewController.webViewController.runJavascript(
         "addCmd('$msg', {isOperator: ${isOperator.toString()}})");
   }
 
   void addString(String msg) {
-    assert(_webViewController != null);
-    _webViewController.runJavascript("addString('$msg')");
+    _webViewController.webViewController.runJavascript("addString('$msg')");
   }
 
   void equal() {
-    assert(_webViewController != null);
-    _webViewController.runJavascript("equal()");
+    _webViewController.webViewController.runJavascript("equal()");
   }
 
   void addKey(String key) {
-    assert(_webViewController != null);
-    _webViewController.runJavascript("simulateKey('$key')");
+    _webViewController.webViewController.runJavascript("simulateKey('$key')");
   }
 
   void deleteExpression() {
-    assert(_webViewController != null);
-    _webViewController.runJavascript("delString()");
+    _webViewController.webViewController.runJavascript("delString()");
   }
 
   void deleteAllExpression() {
-    assert(_webViewController != null);
-    _webViewController.runJavascript("delAll()");
+    _webViewController.webViewController.runJavascript("delAll()");
   }
 }
 //\begin{bmatrix}1&2\\3&4\end{bmatrix}
