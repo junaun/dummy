@@ -41,6 +41,7 @@ class HelpScreenState extends State<HelpScreen> {
                   })),
             ],
           ),
+          /*
           Row(
             children: [
               Expanded(
@@ -51,7 +52,7 @@ class HelpScreenState extends State<HelpScreen> {
                 },
               )),
             ],
-          ),
+          ),*/
         ]));
   }
 }
@@ -66,33 +67,33 @@ class MathBoxController {
 
   void addExpression(String msg, {bool isOperator = false}) {
     assert(_webViewController != null);
-    _webViewController.evaluateJavascript(
+    _webViewController.runJavascript(
         "addCmd('$msg', {isOperator: ${isOperator.toString()}})");
   }
 
   void addString(String msg) {
     assert(_webViewController != null);
-    _webViewController.evaluateJavascript("addString('$msg')");
+    _webViewController.runJavascript("addString('$msg')");
   }
 
   void equal() {
     assert(_webViewController != null);
-    _webViewController.evaluateJavascript("equal()");
+    _webViewController.runJavascript("equal()");
   }
 
   void addKey(String key) {
     assert(_webViewController != null);
-    _webViewController.evaluateJavascript("simulateKey('$key')");
+    _webViewController.runJavascript("simulateKey('$key')");
   }
 
   void deleteExpression() {
     assert(_webViewController != null);
-    _webViewController.evaluateJavascript("delString()");
+    _webViewController.runJavascript("delString()");
   }
 
   void deleteAllExpression() {
     assert(_webViewController != null);
-    _webViewController.evaluateJavascript("delAll()");
+    _webViewController.runJavascript("delAll()");
   }
 }
 //\begin{bmatrix}1&2\\3&4\end{bmatrix}

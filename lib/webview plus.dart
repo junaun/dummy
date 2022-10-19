@@ -24,7 +24,7 @@ class HelpScreenState extends State<HelpScreen> {
         appBar: AppBar(title: Text('MathQuill')),
         body: WebViewPlus(
             javascriptMode: JavascriptMode.unrestricted,
-            initialUrl: 'assets/html/test4.html',
+            initialUrl: 'assets/html/test5.html',
             onWebViewCreated: (controller) {
               this.controller = controller;
             }));
